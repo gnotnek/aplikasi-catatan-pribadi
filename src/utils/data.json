@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "Buy groceries",
+        "body": "Milk, Bread, Cheese, Eggs, Butter",
+        "archived": false,
+        "createdAt": "2023-10-01T10:00:00Z"
+    },
+    {
+        "id": 2,
+        "title": "Workout",
+        "body": "1 hour of cardio and strength training",
+        "archived": false,
+        "createdAt": "2023-10-02T08:30:00Z"
+    },
+    {
+        "id": 3,
+        "title": "Read a book",
+        "body": "Finish reading 'The Great Gatsby'",
+        "archived": true,
+        "createdAt": "2023-09-25T14:45:00Z"
+    },
+    {
+        "id": 4,
+        "title": "Complete project",
+        "body": "Finish the React project for the client",
+        "archived": false,
+        "createdAt": "2023-10-03T12:00:00Z"
+    },
+    {
+        "id": 5,
+        "title": "Call mom",
+        "body": "Catch up with mom over the phone",
+        "archived": true,
+        "createdAt": "2023-09-30T16:00:00Z"
+    }
+]
