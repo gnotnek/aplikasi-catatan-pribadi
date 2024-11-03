@@ -55,9 +55,9 @@ class TodoInput extends React.Component {
     render() {
         return (
             <form className='todo-input' onSubmit={this.onSubmitEventHandler}>
-                <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventHandler} />
+                <input type="text" placeholder="Title" value={this.state.title} onChange={this.onTitleChangeEventHandler} />
                 <input type="text" placeholder="Body" value={this.state.body} onChange={this.onBodyChangeEventHandler} />
-                <input type="checkbox" id="isDone" name="isDone" value="isDone" />
+                <input type="checkbox" value={this.state.archived} />
                 <button type="submit">Tambah</button>
             </form>
         )

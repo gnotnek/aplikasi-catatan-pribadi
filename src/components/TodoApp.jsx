@@ -1,5 +1,7 @@
 import React from 'react';
 import data from '../utils/data.json'
+import TodoInput from './TodoInput';
+import TodoList from './TodoList';
 
 // const MAX_TITLE_LENGTH = 50;
 
@@ -10,8 +12,23 @@ class ToDoApp extends React.Component {
             todos: data,
         }
 
+        this.onAddHandler = this.onAddHandler.bind(this);
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.onUpdateHandler = this.onUpdateHandler.bind(this);
+    }
+
+    onAddHandler(todo) {
+        this.setState((prevState) => {
+            return {
+                todos: [
+                    ...prevState.todos,
+                    {
+                        id: +new Date(),
+                        ...todo,
+                    }
+                ]
+            }
+        });
     }
 
     onDeleteHandler(id) {
@@ -34,46 +51,13 @@ class ToDoApp extends React.Component {
 
     render() {
         return (
-            <div className="w-full max-w-3xl mx-auto">
-                <header>
-                    <h1 className="text-2xl font-bold text-center">To Do App</h1>
-                </header>
-                <main>
-                    <div className='space-y-4 mb-4'>
-                        <div className='flex items-center space-x-2'>
-                            <input 
-                                type="text" 
-                                placeholder="Task title"
-                                // value={newTaskTitle}
-                                // onChange={(e) => setNewTaskTitle(e.target.value.slice(0, MAX_TITLE_LENGTH))}
-                                // maxLength={MAX_TITLE_LENGTH}
-                            />
-                            <span className='text-sm text-gray-500'>
-                                {/* {MAX_TITLE_LENGTH - newTaskTitle.length} characters left */}
-                            </span>
-                        </div>
-                        <textarea 
-                            placeholder="Task description"
-                            // value={newTaskBody}
-                            // onChange={(e) => setNewTaskBody(e.target.value)}
-                        />
-                        <button 
-                            // onClick={addTask} 
-                            className="w-full">
-                                Add Task
-                        </button>
-                    </div>
-                    <ul className='space-y-4'>
-                        {/* {tasks.map(task => (
-                            <Task 
-                                key={task.id} 
-                                task={task} 
-                                onDelete={deleteTask} 
-                                onUpdate={updateTask} 
-                            />
-                        ))} */}
-                    </ul>
-                </main>
+            <div>
+                <h1>Aplikasi Catatan Pribadi</h1>
+                <h2>Daftar Catatan</h2>
+                <h2>Tambah To Do</h2>
+                <TodoInput onAdd={this.onAddHandler} />
+                <h2>Daftar To Do</h2>
+                <TodoList todos={this.state.todos} onDelete={this.onDeleteHandler} onUpdate={this.onUpdateHandler} />
             </div>
         );
     }
