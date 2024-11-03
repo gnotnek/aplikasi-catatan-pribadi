@@ -12,37 +12,40 @@ class ToDoApp extends React.Component {
             todos: data,
         }
 
-        this.onAddHandler = this.onAddHandler.bind(this);
-        this.onDeleteHandler = this.onDeleteHandler.bind(this);
-        this.onUpdateHandler = this.onUpdateHandler.bind(this);
+        this.onAddTodoHandler = this.onAddTodoHandler.bind(this);
+        this.onDeleteTodoHandler = this.onDeleteTodoHandler.bind(this);
+        this.onUpdateTodoHandler = this.onUpdateTodoHandler.bind(this);
     }
 
-    onAddHandler(todo) {
+    onAddTodoHandler({title, body, archived}) {
         this.setState((prevState) => {
             return {
                 todos: [
                     ...prevState.todos,
                     {
                         id: +new Date(),
-                        ...todo,
+                        title,
+                        body,
+                        archived,
+                        createdAt: new Date(),
                     }
                 ]
             }
         });
     }
 
-    onDeleteHandler(id) {
+    onDeleteTodoHandler(id) {
         const todos = this.state.todos.filter(todo => todo.id !== id);
         this.setState({ todos });
     }
 
-    onUpdateHandler(id, updatedTodo) {
+    onUpdateTodoHandler(id) {
         const todos = this.state.todos.map(todo => {
             if (todo.id === id) {
-                return {
-                    ...todo,
-                    ...updatedTodo,
-                }
+            return {
+                ...todo,
+                archived: !todo.archived,
+            }
             }
             return todo;
         });
@@ -55,9 +58,11 @@ class ToDoApp extends React.Component {
                 <h1>Aplikasi Catatan Pribadi</h1>
                 <h2>Daftar Catatan</h2>
                 <h2>Tambah To Do</h2>
-                <TodoInput onAdd={this.onAddHandler} />
+                <TodoInput addTodo={this.onAddTodoHandler} />
                 <h2>Daftar To Do</h2>
-                <TodoList todos={this.state.todos} onDelete={this.onDeleteHandler} onUpdate={this.onUpdateHandler} />
+                <TodoList todos={this.state.todos.filter(todo => !todo.archived)} onDelete={this.onDeleteTodoHandler} onUpdate={this.onUpdateTodoHandler} />
+                <h2>Daftar Archived</h2>
+                <TodoList todos={this.state.todos.filter(todo => todo.archived)} onDelete={this.onDeleteTodoHandler} onUpdate={this.onUpdateTodoHandler} />
             </div>
         );
     }
